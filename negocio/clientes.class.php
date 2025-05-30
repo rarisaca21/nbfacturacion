@@ -36,7 +36,7 @@
                     "documento" => $post['documento'],
                     "direccion" => $post['direccion'],
                     "email" => $post['email'],
-                    "telefonos" => $post['telefonos']
+                    "telefono" => $post['telefono']
                 ]);
                 $id = $this->db->id();
             } catch (PDOException $e){
