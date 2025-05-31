@@ -1,6 +1,6 @@
 <?php
 	date_default_timezone_set('America/Lima');	 
-	class Clientes{  
+	class Tipodocumentos{  
         private $answer;
         private $db;
         function __construct($database){ 
@@ -17,8 +17,8 @@
                 if(!empty($post['nombre'])){ $query = " WHERE nombre LIKE '%".$post['nombre']."%'"; }
                 $i = (($post['current'] - 1) * 10);
                 $f = $i + 10;
-                $rows = $this->db->query("SELECT * FROM clientes ".$query. " ORDER BY id DESC LIMIT ".$i.", 10")->fetchAll(PDO::FETCH_ASSOC);
-                $total = $this->db->query("SELECT COUNT(*) as total FROM clientes ".$query)->fetchAll(PDO::FETCH_ASSOC);
+                $rows = $this->db->query("SELECT * FROM tipodocumentos ".$query. " ORDER BY id DESC LIMIT ".$i.", 10")->fetchAll(PDO::FETCH_ASSOC);
+                $total = $this->db->query("SELECT COUNT(*) as total FROM tipodocumentos ".$query)->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $e){
                 $this->answer['err']['status'] = 1;
                 $this->answer['err']['msg'] = $e->getMessage();
@@ -30,13 +30,10 @@
         }
         public function add($post){
             try{
-                $this->db->insert("clientes", [
+                $this->db->insert("tipodocumentos", [
                     "nombre" => $post['nombre'],
-                    "tipodocumentos_id" => $post['tipodocumentos_id'],
-                    "documento" => $post['documento'],
-                    "direccion" => $post['direccion'],
-                    "email" => $post['email'],
-                    "telefono" => $post['telefono']
+                    "codigo" => $post['codigo'],
+                    "estado" => $post['estado']
                 ]);
                 $id = $this->db->id();
             } catch (PDOException $e){
@@ -49,13 +46,10 @@
         }
         public function update($post){
             try{
-                $data = $this->db->update("clientes", [
+                $data = $this->db->update("tipodocumentos", [
                     "nombre" => $post['nombre'],
-                    "tipodocumentos_id" => $post['tipodocumentos_id'],
-                    "documento" => $post['documento'],
-                    "direccion" => $post['direccion'],
-                    "email" => $post['email'],
-                    "telefono" => $post['telefono']
+                    "codigo" => $post['codigo'],
+                    "estado" => $post['estado']
                 ], [
                     "id[=]" => $post['id']
                 ]);
@@ -70,7 +64,7 @@
         }
         public function searchById($post){
             try{
-                $rows = $this->db->query("SELECT * FROM clientes WHERE id = " . $_POST['id'])->fetchAll(PDO::FETCH_ASSOC); 
+                $rows = $this->db->query("SELECT * FROM tipodocumentos WHERE id = " . $_POST['id'])->fetchAll(PDO::FETCH_ASSOC); 
             } catch (PDOException $e){
                 $this->answer['err']['status'] = 1;
                 $this->answer['err']['msg'] = $e->getMessage();
@@ -81,7 +75,7 @@
         }
         public function deleteById($post){
             try{
-                $res = $this->db->delete("clientes", [
+                $res = $this->db->delete("tipodocumentos", [
                     "id[=]" => $_POST['id']
                 ]); 
                 $rows = $res->rowCount();
