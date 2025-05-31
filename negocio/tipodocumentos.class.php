@@ -87,5 +87,16 @@
             $this->answer['data']['rowsAffected'] = $rows;
             return json_encode($this->answer);
         }
+        public function list($post){
+            try{
+                $rows = $this->db->query("SELECT * FROM tipodocumentos ")->fetchAll(PDO::FETCH_ASSOC); 
+            } catch (PDOException $e){
+                $this->answer['err']['status'] = 1;
+                $this->answer['err']['msg'] = $e->getMessage();
+                return json_encode($this->answer);
+            } 
+            $this->answer['data']['rows'] = $rows;
+            return json_encode($this->answer);
+        }
     }
 ?>

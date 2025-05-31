@@ -17,5 +17,6 @@
         case 'update': echo $modelo->update($_POST);  break;
         case 'searchById': echo $modelo->searchById($_POST);  break;
         case 'deleteById': echo $modelo->deleteById($_POST);  break;
+        case 'list': echo $modelo->list($_POST);  break;
     }
 ?>
