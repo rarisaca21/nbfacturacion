@@ -13,7 +13,7 @@
 
     switch ($_GET["f"]) {
         case 'board': echo $modelo->board($_POST);  break;
-        case 'nuevo': echo $modelo->nuevo($_POST);  break;
+        case 'add': echo $modelo->add($_POST);  break;
         case 'update': echo $modelo->update($_POST);  break;
         case 'searchById': echo $modelo->searchById($_POST);  break;
         case 'deleteById': echo $modelo->deleteById($_POST);  break;
